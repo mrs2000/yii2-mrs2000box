@@ -1,0 +1,24 @@
+{
+    "name": "mrssoft/yii2-mrs2000box",
+    "version": "1.0.0",
+    "description": "Yii2 mrs2000box asset",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Melnikov Ruslan",
+            "email": "mrs2000@inbox.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "mrssoft/yii2-image": "*",
+        "mrssoft/yii2-mrs2000box": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "mrssoft\\mrs2000box\\": ""
+        }
+    }
+}

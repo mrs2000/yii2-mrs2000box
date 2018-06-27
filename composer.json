@@ -1,5 +1,6 @@
 {
     "name": "mrssoft/yii2-mrs2000box",
+	"version": "1.0.1",
     "description": "Yii2 mrs2000box asset",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],

@@ -1,145 +1,168 @@
-/* Darkbox */
-.mrs2000box-frame {
-	position:fixed;
-	top:0;
-	left:0;
-	display:none;
-	overflow:hidden;
-	width:100%;
-	height:100%;
-	z-index:10350;
-}
-.darkbox-frame-on {
-	display:block;
+﻿/*
+ * jQuery плагин для показа изображений
+ * mrs2000box
+ *
+ * @author Melnikov R.S.
+ */
+
+.m2b-shadow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    z-index: 10000;
 }
 
-/* Shadow */
-.darkbox-shadow {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:#000;
-	opacity:0;
+.m2b-shadow2 {
+    position: fixed;
+    top: 4%;
+    left: 3%;
+    z-index: 10001;
+    width: 94%;
+    height: 92%;
+    background: #000;
+    opacity: 0.5;
+    border-radius: 3px;
 }
 
-/* Canvas */
-.darkbox-canvas {
-	position:absolute;
-	top:50%;
-	left:50%;
-	overflow:hidden;
-	margin:-40px 0 0 -40px;
-	width:80px;
-	height:80px;
-	background:#000 url(spinner.gif) 50% 50% no-repeat;
-	opacity:.5;
-}
-.darkbox-canvas img {
-	display: block;
-	visibility: hidden;
-    max-width: none;
-}
-.darkbox-canvas-load {
-	background-image: none;
-}
-.darkbox-canvas-done {
-	overflow: visible;
-	opacity: 1;
-}
-.darkbox-canvas-done img {
-	visibility: visible;
-	opacity: 0;
-    max-width: none;
+.m2b-frame {
+    position: fixed;
+    top: 4%;
+    left: 3%;
+    z-index: 10001;
+    width: 94%;
+    height: 92%;
+    border: 1px solid #666;
+    box-sizing: border-box;
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 3px;
 }
 
-/* Button */
-/*mrs2000box*/
-.darkbox-button-next {
-	position:absolute;
-	display:none;
-    top:120px;
-	width:30px;
-	height:30px;
-	cursor:pointer;
-	z-index:1;      
-    right:-20px;
-	background:url(next.png) no-repeat;
-}
-.darkbox-button-prev {
-	position:absolute;
-	display:none;
-    top:120px;
-	width:30px;
-	height:30px;
-	cursor:pointer;
-	z-index:1;      
-    left:-20px;
-	background:url(prev.png) no-repeat;
+.m2b-image {
+    position: relative;
+    z-index: 10002;
 }
 
-/*mrs2000box*/ 
-.darkbox-description {
-    background: #fff;
-    opacity:.4;
-    color: #000;
-    position:absolute;
-    text-align: center;
-    bottom: 0;
-    padding: 3px;
-    display:none;
+.m2b-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    width: 100px;
+    height: 100px;
+    z-index: 10002;
+    border-radius: 3px;
+    background: url(/img/mrs2000box/mrs2000box-error.png) no-repeat;
+}
+
+.m2b-left, .m2b-right {
+    top: 0;
+    position: absolute;
+    opacity: 0.5;
+    width: 50%;
+    height: 100%;
     cursor: pointer;
-}
-.darkbox-button {
-	position:absolute;
-	top:-13px;
-	display:none;
-	width:30px;
-	height:30px;
-	background:url(close.png) no-repeat;
-	cursor:pointer;
-	z-index:1;
-}
-.darkbox-button-on {
-	display:block;
-}
-.darkbox-button-left {
-	left:-16px;
-}
-.darkbox-button-right {
-	right:-16px;
+    z-index: 10003;
 }
 
-/* Просмотр фото */
-* html body {
-	height: 100%;
+.m2b-left {
+    left: 0;
+    background: url(/img/mrs2000box/mrs2000box-prev.png) no-repeat 5% 50%;
 }
-* html .mrs2000box-frame {
-	position:absolute;
-	top:expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+
+.m2b-right {
+    right: 0;
+    background: url(/img/mrs2000box/mrs2000box-next.png) no-repeat 95% 50%;
 }
-.darkbox-shadow {
-	filter:alpha(opacity=0);
+
+.m2b-left:hover, .m2b-right:hover {
+    opacity: 1;
 }
-.darkbox-canvas {
-	filter:alpha(opacity=50);
+
+.m2b-btn-close {
+    background: url(/img/mrs2000box/mrs2000box-close.png) no-repeat;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 10004;
+    opacity: 0.8;
 }
-.darkbox-canvas-done {
-	filter:none;
+
+.m2b-btn-close:hover {
+    opacity: 1;
 }
-.darkbox-canvas-done img {
-    filter:alpha(opacity=0);
+
+.m2b-title {
+    background: #eee;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10004;
+    display: none;
+    font-size: 14px;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: normal;
+    font-style: normal;
+    box-sizing: border-box;
+    border-radius: 0 0 3px 3px;
 }
-* html .darkbox-button {
-	background:none;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='close.png',sizingMethod='crop');
+
+/* Spinner */
+.m2b-spinner {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -30px -30px;
 }
-* html .darkbox-button-prev {
-	background:none;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='prev.png',sizingMethod='crop');
+
+.m2b-double-bounce1, .m2b-double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.9;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: m2b-sk-bounce 2.0s infinite ease-in-out;
+    animation: m2b-sk-bounce 2.0s infinite ease-in-out;
 }
-* html .darkbox-button-next {
-	background:none;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='next.png',sizingMethod='crop');
+
+.m2b-double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
 }
+
+@-webkit-keyframes m2b-sk-bounce {
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes m2b-sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+

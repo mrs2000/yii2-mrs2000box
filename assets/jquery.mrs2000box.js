@@ -39,7 +39,7 @@
                 onLoad: null,
                 onResize: null,
                 onClose: null,
-                eventSelector: 'a, img'
+                eventSelector: 'a'
             }, options);
 
             if (options.advanced) { // depricated
@@ -61,7 +61,7 @@
                         $a = $wrapper.eq(index);
                     }
                     options = $wrapper.data('m2b-options');
-                    //current = index;
+                    current = index;
                     show($wrapper, $a[0]);
                 }
             }
@@ -341,14 +341,18 @@
             list = [];
             if (options.showGallery) {
 
-                var $items = $wrapper.find('a'), attr = 'href';
+                var $items = $wrapper.find('a'),
+                    attr = 'href';
+
                 if ($items.length == 0) {
                     attr = 'src';
                     $items = $wrapper.find('img');
                 }
 
                 $items.each(function (index, element) {
-                    if (element == item) current = index;
+                    if (element == item) {
+                        current = index;
+                    }
                     list.push({
                         object: element,
                         href: element[attr],

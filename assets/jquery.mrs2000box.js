@@ -2,7 +2,7 @@
  *  jQuery плагин для показа изображений
  *
  *  @author Melnikov R.S.
- *  @version 1.0.7
+ *  @version 1.0.8
  */
 
 (function ($) {
